@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+body {
+  background-color: #fcf2f0;
+}
+
+.header {
+  margin: 50px;
+  text-align: center;
+  color: #333333;
+  font-family: "Roboto", sans-serif;
+  font-weight: bolder;
+  font-size: 60px;
+}
+
+.header-score {
+  color: #333333;
+  font-family: "Roboto", sans-serif;
+  margin: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.round-display {
+  color: #333333;
+  font-family: "Roboto", sans-serif;
+  margin: 10px;
+  text-align: center;
+  font-size: 55px;
+  font-weight: bolder;
+}
+
+.result {
+  color: #333333;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+  font-size: 30px;
+  font-weight: normal;
+}
+
+#player-score {
+  margin: 50px;
+  font-size: 55px;
+}
+
+#computer-score {
+  margin: 50px;
+  font-size: 55px;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 200px;
+}
+
+button {
+  background: transparent;
+  border: none;
+  transition: transform 0.3s ease;
+  transition: transform 0.1s;
+}
+
+button:active {
+  transform: scale(0.9);
+}
+
+/* This keyframe animation will make the button return to its original size with a bounce effect */
+@keyframes bounce {
+  0% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Bounce animation */
+button:not(:active) {
+  animation: bounce 0.4s;
+}
+
+button:hover {
+  transform: scale(1.05); /* Enlarge the button slightly on hover */
+}
+
+img {
+  width: 300px;
+}
