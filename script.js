@@ -38,82 +38,84 @@ function updateRound() {
 function playRound(playerSelection, computerSelection) {
   round_statement = "Round Result is displayed here";
 
-  if (playerSelection == "Rock" && computerSelection === "Paper") {
+  if (playerSelection === "Rock" && computerSelection === "Paper") {
     round_statement = "You Lost! Paper beats Rock";
     computerScore++;
     return round_statement;
   }
-  if (playerSelection == "Rock" && computerSelection === "Scissors") {
+  if (playerSelection === "Rock" && computerSelection === "Scissors") {
     round_statement = "You Won! Rock beats Scissors";
     playerScore++;
     return round_statement;
   }
 
-  if (playerSelection == "Rock" && computerSelection === "Rock") {
+  if (playerSelection === "Rock" && computerSelection === "Rock") {
     round_statement = "Tie! Rock doesn't beat Rock";
     return round_statement;
   }
-  if (playerSelection == "Paper" && computerSelection === "Rock") {
+  if (playerSelection === "Paper" && computerSelection === "Rock") {
     round_statement = "You Won! Paper beats Rock";
     playerScore++;
     return round_statement;
   }
-  if (playerSelection == "Paper" && computerSelection === "Scissors") {
+  if (playerSelection === "Paper" && computerSelection === "Scissors") {
     round_statement = "You Lost! Scissors beats Paper";
     computerScore++;
     return round_statement;
   }
-  if (playerSelection == "Paper" && computerSelection === "Paper") {
+  if (playerSelection === "Paper" && computerSelection === "Paper") {
     round_statement = "Tie! Paper doesn't beat Paper";
     return round_statement;
   }
 
-  if (playerSelection == "Scissors" && computerSelection === "Rock") {
+  if (playerSelection === "Scissors" && computerSelection === "Rock") {
     round_statement = "You Lost! Rock beats Scissors";
     computerScore++;
     return round_statement;
   }
 
-  if (playerSelection == "Scissors" && computerSelection === "Paper") {
+  if (playerSelection === "Scissors" && computerSelection === "Paper") {
     round_statement = "You Won! Scissors beats Paper";
     playerScore++;
     return round_statement;
   }
 
-  if (playerSelection == "Scissors" && computerSelection === "Scissors") {
+  if (playerSelection === "Scissors" && computerSelection === "Scissors") {
     round_statement = "Tie! Scissors doesn't beat Scissors";
     return round_statement;
   }
 }
 // Set player choice
 function setPlayerChoice(event) {
-  const clickedButton = event.target.parentNode; // Sets the target as the parent node(button)
-  if (clickedButton === rockButton) {
-    playerSelection = "Rock";
-    const computerSelection = getComputerChoice();
-    const result = playRound(playerSelection, computerSelection);
-    currentRoundResultElement.textContent = round_statement;
-    if (currentRound < MaxRounds) {
-      updateRound();
+  if (currentRound != MaxRounds) {
+    const clickedButton = event.target.parentNode; // Sets the target as the parent node(button)
+    if (clickedButton === rockButton) {
+      playerSelection = "Rock";
+      const computerSelection = getComputerChoice();
+      playRound(playerSelection, computerSelection);
+      currentRoundResultElement.textContent = round_statement;
+      if (currentRound < MaxRounds) {
+        updateRound();
+      }
+    } else if (clickedButton === paperButton) {
+      playerSelection = "Paper";
+      const computerSelection = getComputerChoice();
+      playRound(playerSelection, computerSelection);
+      currentRoundResultElement.textContent = round_statement;
+      if (currentRound < MaxRounds) {
+        updateRound();
+      }
+    } else if (clickedButton === scissorsButton) {
+      playerSelection = "Scissors";
+      const computerSelection = getComputerChoice();
+      playRound(playerSelection, computerSelection);
+      currentRoundResultElement.textContent = round_statement;
+      if (currentRound < MaxRounds) {
+        updateRound();
+      }
     }
-  } else if (clickedButton === paperButton) {
-    playerSelection = "Paper";
-    const computerSelection = getComputerChoice();
-    const result = playRound(playerSelection, computerSelection);
-    currentRoundResultElement.textContent = round_statement;
-    if (currentRound < MaxRounds) {
-      updateRound();
-    }
-  } else if (clickedButton === scissorsButton) {
-    playerSelection = "Scissors";
-    const computerSelection = getComputerChoice();
-    const result = playRound(playerSelection, computerSelection);
-    currentRoundResultElement.textContent = round_statement;
-    if (currentRound < MaxRounds) {
-      updateRound();
-    }
+    playGame();
   }
-  playGame();
 }
 
 function playGame() {
@@ -122,39 +124,41 @@ function playGame() {
   currentRoundElement.textContent = `Round: ${currentRound}`;
 
   if (currentRound == MaxRounds) {
-    if (playerScore > computerScore) {
-      alert(
-        `You won the game!\nYou scored ${playerScore} points\nComputer scored ${computerScore} point(s)`
-      );
-      let result = window.confirm("Do you want to play again?"); // Ask player if they want to play again
-      if (result) {
-        window.location.reload();
-      } else {
-        window.close();
+    setTimeout(function () {
+      if (playerScore > computerScore) {
+        alert(
+          `You won the game!\nYou scored ${playerScore} points\nComputer scored ${computerScore} point(s)`
+        );
+        let result = window.confirm("Do you want to play again?"); // Ask player if they want to play again
+        if (result) {
+          window.location.reload();
+        } else {
+          window.close();
+        }
       }
-    }
 
-    if (computerScore > playerScore) {
-      alert(
-        `You lost the game!\nYou scored ${playerScore} point(s)\nComputer scored ${computerScore} point(s)`
-      );
-      let result = window.confirm("Do you want to play again?");
-      if (result) {
-        window.location.reload();
-      } else {
-        window.close();
+      if (computerScore > playerScore) {
+        alert(
+          `You lost the game!\nYou scored ${playerScore} point(s)\nComputer scored ${computerScore} point(s)`
+        );
+        let result = window.confirm("Do you want to play again?");
+        if (result) {
+          window.location.reload();
+        } else {
+          window.close();
+        }
       }
-    }
 
-    if (playerScore == computerScore) {
-      alert(`It's a tie!\nYou and the Computer both scored ${playerScore}`);
-      let result = window.confirm("Do you want to play again?");
-      if (result) {
-        window.location.reload();
-      } else {
-        window.close();
+      if (playerScore == computerScore) {
+        alert(`It's a tie!\nYou and the Computer both scored ${playerScore}`);
+        let result = window.confirm("Do you want to play again?");
+        if (result) {
+          window.location.reload();
+        } else {
+          window.close();
+        }
       }
-    }
+    }, 2000); // Delay of 3 seconds
   }
 }
 
